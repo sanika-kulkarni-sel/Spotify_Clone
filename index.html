@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Clone</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fab fa-spotify"></i>
+                <span>Spotify</span>
+            </div>
+            <nav class="nav-links">
+                <ul>
+                    <li class="active" id="nav-home"><i class="fas fa-home"></i> <span>Home</span></li>
+                    <li id="nav-search"><i class="fas fa-search"></i> <span>Search</span></li>
+                    <li id="nav-library"><i class="fas fa-book-open"></i> <span>Your Library</span></li>
+                </ul>
+            </nav>
+            <div class="nav-links secondary-nav">
+                <ul>
+                    <li id="nav-create-playlist"><i class="fas fa-plus-square"></i> <span>Create Playlist</span></li>
+                    <li id="nav-liked-songs"><i class="fas fa-heart"></i> <span>Liked Songs</span></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-divider"></div>
+            
+            <div class="playlist-scroll">
+                <ul id="sidebar-playlists">
+                    <!-- Dynamic Playlists -->
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-view">
+            <!-- Top Header -->
+            <header class="top-bar">
+                <div class="nav-arrows">
+                    <button class="arrow-btn"><i class="fas fa-chevron-left"></i></button>
+                    <button class="arrow-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="user-auth" id="user-auth-container">
+                    <a href="signup.html" class="auth-btn signup-btn">Sign up</a>
+                    <a href="login.html" class="auth-btn login-btn">Log in</a>
+                </div>
+            </header>
+
+            <!-- Home View -->
+            <div class="content-scroll" id="view-home">
+                <!-- Greetings Section -->
+                <section class="section">
+                    <h2>Good afternoon</h2>
+                    <div class="greetings-grid" id="greetings-grid">
+                        <!-- Populated by JS -->
+                    </div>
+                </section>
+
+                <!-- Made For You Section -->
+                <section class="section">
+                    <div class="section-header">
+                        <h2>Made For You</h2>
+                        <span>Show all</span>
+                    </div>
+                    <div class="cards-container" id="made-for-you-grid">
+                        <!-- Populated by JS -->
+                    </div>
+                </section>
+                
+                <div style="height: 100px;"></div>
+            </div>
+
+            <!-- Search View -->
+            <div class="content-scroll hidden" id="view-search">
+                <div class="search-header">
+                    <input type="text" id="search-input" placeholder="What do you want to listen to?">
+                </div>
+                <section class="section">
+                    <h2>Search Results</h2>
+                    <div class="cards-container" id="search-results-grid"></div>
+                </section>
+                <div style="height: 100px;"></div>
+            </div>
+
+            <!-- Library View -->
+            <div class="content-scroll hidden" id="view-library">
+                <section class="section">
+                    <h2>Your Library</h2>
+                    <div class="cards-container" id="library-grid">
+                        <!-- Playlists and Liked Songs card will go here -->
+                    </div>
+                </section>
+                <div style="height: 100px;"></div>
+            </div>
+
+            <!-- Playlist/Liked Songs View -->
+            <div class="content-scroll hidden" id="view-playlist">
+                <div class="playlist-header">
+                    <h1 id="playlist-title">Playlist Name</h1>
+                </div>
+                <div class="playlist-tracks-container" id="playlist-tracks">
+                    <!-- Tracks go here -->
+                </div>
+                <div style="height: 100px;"></div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Playback Bar (Bottom) -->
+    <footer class="playback-bar">
+        <!-- Left: Now Playing Info -->
+        <div class="now-playing" id="now-playing">
+            <img src="https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?auto=format&fit=crop&q=80&w=300&h=300" alt="Cover" class="np-cover" id="np-cover">
+            <div class="np-info">
+                <div class="np-title" id="np-title">Find My Way</div>
+                <div class="np-artist" id="np-artist">Blue Deer feat. Luqman Frank</div>
+            </div>
+            <button class="heart-btn"><i class="far fa-heart"></i></button>
+        </div>
+
+        <!-- Center: Player Controls -->
+        <div class="player-controls">
+            <div class="control-buttons">
+                <button class="ctrl-btn"><i class="fas fa-random"></i></button>
+                <button class="ctrl-btn" id="prev-btn"><i class="fas fa-step-backward"></i></button>
+                <button class="play-btn" id="play-pause-btn"><i class="fas fa-play" id="play-icon"></i></button>
+                <button class="ctrl-btn" id="next-btn"><i class="fas fa-step-forward"></i></button>
+                <button class="ctrl-btn"><i class="fas fa-redo-alt"></i></button>
+            </div>
+            <div class="progress-container">
+                <span class="time" id="current-time">0:00</span>
+                <div class="progress-bar-bg" id="progress-bar-bg">
+                    <div class="progress-bar-fill" id="progress-bar-fill"></div>
+                </div>
+                <span class="time" id="total-time">0:00</span>
+            </div>
+        </div>
+
+        <!-- Right: Volume & Extra Controls -->
+        <div class="extra-controls">
+            <button class="ctrl-btn"><i class="fas fa-list-ul"></i></button>
+            <button class="ctrl-btn"><i class="fas fa-desktop"></i></button>
+            <div class="volume-container">
+                <button class="ctrl-btn"><i class="fas fa-volume-up"></i></button>
+                <div class="volume-bar-bg" id="volume-bar-bg">
+                    <div class="volume-bar-fill" id="volume-bar-fill"></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Audio Element -->
+    <audio id="audio-player"></audio>
+
+    <!-- Add to Playlist Modal -->
+    <div id="playlist-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h2>Add to Playlist</h2>
+            <ul id="modal-playlist-list" class="modal-list">
+                <!-- Playlists injected by JS -->
+            </ul>
+            <button id="modal-close-btn" class="modal-btn">Cancel</button>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Spotify</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/signup.css">
+</head>
+<body class="login-body">
+
+    <header class="login-header">
+        <a href="index.html" class="logo-link">
+            <i class="fab fa-spotify"></i>
+            <span>Spotify</span>
+        </a>
+    </header>
+
+    <main class="login-container">
+        <h1 class="login-title">Log in to Spotify</h1>
+
+        <div class="social-btns login-social-btns">
+            <button id="google-login-btn" class="btn-social">
+                <i class="fab fa-google"></i>
+                Continue with Google
+            </button>
+            <button class="btn-social">
+                <i class="fab fa-facebook"></i>
+                Continue with Facebook
+            </button>
+            <button class="btn-social">
+                <i class="fab fa-apple"></i>
+                Continue with Apple
+            </button>
+            <button class="btn-social btn-social-outline">
+                Continue with phone number
+            </button>
+        </div>
+
+        <div class="divider">
+            <span>or</span>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email or username</label>
+            <input type="text" id="email" placeholder="Email or username">
+        </div>
+        
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Password">
+        </div>
+
+        <div class="login-options">
+            <label class="remember-me">
+                <input type="checkbox" checked>
+                <span class="checkmark"></span>
+                Remember me
+            </label>
+        </div>
+
+        <button class="submit-btn login-submit-btn" id="login-submit-btn">Log In</button>
+        
+        <div style="text-align: center; margin-bottom: 24px;">
+            <a href="#" class="help-text" style="font-size: 16px;">Forgot your password?</a>
+        </div>
+
+        <div class="login-prompt">
+            <hr style="border: 0; border-bottom: 1px solid #292929; margin-bottom: 32px; margin-top: 8px;">
+            Don't have an account? <a href="signup.html">Sign up for Spotify</a>.
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('login-submit-btn').addEventListener('click', () => {
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            if (email && password) {
+                localStorage.setItem('user_email', email);
+                localStorage.removeItem('google_token');
+                window.location.href = 'index.html';
+            } else {
+                alert('Please enter both email and password.');
+            }
+        });
+
+        document.getElementById('google-login-btn').addEventListener('click', () => {
+            alert('Google Login is currently disabled. Please use the email flow.');
+        });
+    </script>
+</body>
+</html>

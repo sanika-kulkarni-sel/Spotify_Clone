@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up - Spotify</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/signup.css">
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo-link">
+            <i class="fab fa-spotify"></i>
+            <span>Spotify</span>
+        </a>
+    </header>
+
+    <main class="signup-container">
+        <h1 class="signup-title">Sign up to start listening</h1>
+
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" id="email" placeholder="name@domain.com">
+        </div>
+
+        <div class="form-group">
+            <label for="password">Create a password</label>
+            <input type="password" id="password" placeholder="Create a password">
+        </div>
+
+        <span class="help-text">Use phone number instead.</span>
+
+        <button class="submit-btn" id="submit-btn">Next</button>
+
+        <div class="divider">
+            <span>or</span>
+        </div>
+
+        <div class="social-btns">
+            <button id="google-login-btn" class="btn-social">
+                <i class="fab fa-google"></i>
+                Continue with Google
+            </button>
+            <button class="btn-social">
+                <i class="fab fa-facebook"></i>
+                Sign up with Facebook
+            </button>
+            <button class="btn-social">
+                <i class="fab fa-apple"></i>
+                Sign up with Apple
+            </button>
+        </div>
+
+        <div class="login-prompt">
+            <hr style="border: 0; border-bottom: 1px solid #292929; margin-bottom: 32px; margin-top: 32px;">
+            Already have an account? <a href="login.html">Log in here</a>.
+        </div>
+    </main>
+    <script>
+        document.getElementById('submit-btn').addEventListener('click', () => {
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            if (email && password) {
+                localStorage.setItem('user_email', email);
+                localStorage.removeItem('google_token');
+                window.location.href = 'index.html';
+            } else if (!email) {
+                alert('Please enter an email address.');
+            } else {
+                alert('Please enter a password.');
+            }
+        });
+
+        document.getElementById('google-login-btn').addEventListener('click', () => {
+            alert('Google Login is currently disabled. Please use the email flow.');
+        });
+    </script>
+</body>
+</html>
